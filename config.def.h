@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10", 
+static const char *fonts[]          = { "monospace:size=10",
 					"BmPlus_IBM_VGA_8x16:size=12" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -17,6 +17,14 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+};
+
+static const char *const autostart[] = {
+	"st", NULL,
+	"hsetroot", "-center", "/home/sgannon/Pictures/Serpinski_Linux.png", NULL,	//sets wallpaper
+	"sh", "-c", "dwm_start.sh", NULL,	//turns on natural scrolling
+	"sh", "-c", "while :; do dwm_status.sh -; sleep 1;  done", NULL,	//sets up status bar
+	NULL /* terminate */
 };
 
 /* tagging */
@@ -44,7 +52,7 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "HHH",      grid },
+	{ "-|-",      grid },
 };
 
 /* key definitions */
