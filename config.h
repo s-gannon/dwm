@@ -64,9 +64,6 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 //volume keys
-static const char *upvol[] = {"amixer","set","Master","2+",NULL};
-static const char *downvol[] = {"amixer","set","Master","2-",NULL};
-static const char *mute[] = {"amixer","-q","set","Master","toggle",NULL};
 //for pulse compatibility
 static const char *upvol[] = {"amixer","-q","sset","Master","1%+",NULL};
 static const char *downvol[] = {"amixer","-q","sset","Master","1%-",NULL};
@@ -87,8 +84,8 @@ static const Key keys[] = {
 	{ 0,		XF86XK_AudioRaiseVolume,   spawn,	   {.v = upvol } },
 	{ 0,		XF86XK_AudioLowerVolume,   spawn,	   {.v = downvol } },
 	{ 0,		XF86XK_AudioMute,	   spawn,	   {.v = mute } },
-	{ 0,		XF86MonBrightnessUp,	   spawn,	   {.v = upbright } },
-	{ 0,		XF86MonBrightnessDown,	   spawn,	   {.v = downbright } },
+	{ 0,		XF86XK_MonBrightnessUp,	   spawn,	   {.v = upbright } },
+	{ 0,		XF86XK_MonBrightnessDown,  spawn,	   {.v = downbright } },
 	//the defaults
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
