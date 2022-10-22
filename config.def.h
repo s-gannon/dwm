@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>	//so I can use volume up and down
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
@@ -11,19 +12,19 @@ static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#cc2222";
+static const char col_gray4[]       = "#efefef";
+static const char col_cyan[]        = "#af1111";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
-
+//commands that will run at start automatically; shell commands need "sh", "-c"
 static const char *const autostart[] = {
-	"st", NULL,
 	"hsetroot", "-center", "/home/sgannon/Pictures/Serpinski_Linux.png", NULL,	//sets wallpaper
-	"sh", "-c", "dwm_start.sh", NULL,	//turns on natural scrolling
-	"sh", "-c", "while :; do dwm_status.sh -; sleep 1;  done", NULL,	//sets up status bar
+	"sh", "-c", "/home/sgannon/Github/dwm/dwm_start.sh", NULL,	//turns on natural scrolling
+	"sh", "-c", "while :; do /home/sgannon/Github/dwm/dwm_status.sh -; sleep 1; done", NULL,	//sets up status bar
+	"brave", NULL,
 	NULL /* terminate */
 };
 
@@ -37,7 +38,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Brave",    NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Brave",    NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
@@ -62,6 +63,14 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+//volume keys
+static const char *upvol[] = {"amixer","set","Master","2+",NULL};
+static const char *downvol[] = {"amixer","set","Master","2-",NULL};
+static const char *mute[] = {"amixer","-q","set","Master","toggle",NULL};
+//for pulse compatibility
+static const char *upvol[] = {"amixer","-q","sset","Master","1%+",NULL};
+static const char *downvol[] = {"amixer","-q","sset","Master","1%-",NULL};
+static const char *mute[] = {"amixer","-q","-D","pulse","sset","Master","toggle",NULL};
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -72,6 +81,11 @@ static const char *termcmd[]  = { "konsole", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+	//custom keys
+	{ 0,		XF86XK_AudioRaiseVolume,   spawn,	   {.v = upvol } },
+	{ 0,		XF86XK_AudioLowerVolume,   spawn,	   {.v = downvol } },
+	{ 0,		XF86XK_AudioMute,	   spawn,	   {.v = mute } },
+	//the defaults
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
