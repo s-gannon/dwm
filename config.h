@@ -12,7 +12,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#cc2222";
+static const char col_cyan[]        = "#af1111";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -20,10 +20,9 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"st", NULL,
 	"hsetroot", "-center", "/home/sgannon/Pictures/Serpinski_Linux.png", NULL,	//sets wallpaper
-	"sh", "-c", "dwm_start.sh", NULL,	//turns on natural scrolling
-	"sh", "-c", "while :; do dwm_status.sh -; sleep 1;  done", NULL,	//sets up status bar
+	"sh", "-c", "/home/sgannon/Github/dwm/dwm_start.sh", NULL,	//turns on natural scrolling
+	"sh", "-c", "while :; do /home/sgannon/Github/dwm/dwm_status.sh -; sleep 1; done", NULL,	//sets up status bar
 	NULL /* terminate */
 };
 
