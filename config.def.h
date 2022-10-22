@@ -71,7 +71,9 @@ static const char *mute[] = {"amixer","-q","set","Master","toggle",NULL};
 static const char *upvol[] = {"amixer","-q","sset","Master","1%+",NULL};
 static const char *downvol[] = {"amixer","-q","sset","Master","1%-",NULL};
 static const char *mute[] = {"amixer","-q","-D","pulse","sset","Master","toggle",NULL};
-
+//brightness keys
+static const char *upbright[] = {"xdotool","key","XF86MonBrightnessUp",NULL};
+static const char *downbright[] = {"xdotool","key","XF86MonBrightnessDown",NULL};
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -85,6 +87,8 @@ static const Key keys[] = {
 	{ 0,		XF86XK_AudioRaiseVolume,   spawn,	   {.v = upvol } },
 	{ 0,		XF86XK_AudioLowerVolume,   spawn,	   {.v = downvol } },
 	{ 0,		XF86XK_AudioMute,	   spawn,	   {.v = mute } },
+	{ 0,		XF86MonBrightnessUp,	   spawn,	   {.v = upbright } },
+	{ 0,		XF86MonBrightnessDown,	   spawn,	   {.v = downbright } },
 	//the defaults
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
