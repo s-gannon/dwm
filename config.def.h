@@ -24,7 +24,7 @@ static const char *const autostart[] = {
 	"hsetroot", "-center", "/home/sgannon/Pictures/Serpinski_Linux.png", NULL,	//sets wallpaper
 	"sh", "-c", "/home/sgannon/Github/dwm/dwm_start.sh", NULL,	//turns on natural scrolling
 	"sh", "-c", "while :; do /home/sgannon/Github/dwm/dwm_status.sh -; sleep 1; done", NULL,	//sets up status bar
-	"brave", NULL,
+	"konsole", NULL,
 	NULL /* terminate */
 };
 
@@ -38,7 +38,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Brave",    NULL,       NULL,       1 << 1,       0,           -1 },
+	//{ "Brave",    NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
