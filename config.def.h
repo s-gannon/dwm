@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>	//to use special keys like volume up and brightness down
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
@@ -62,14 +63,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
-//volume keys
-//for pulse compatibility
-static const char *upvol[]   = {"amixer", "-q", "sset", "Master", "5%+", NULL};
-static const char *downvol[] = {"amixer", "-q", "sset", "Master", "5%-", NULL};
-static const char *mute[]    = {"amixer", "-q", "-D", "pulse", "sset", "Master", "toggle", NULL};
-//brightness keys
-static const char *upbright[]   = {"brightnessctl", "s", "+5", NULL};
-static const char *downbright[] = {"brightnessctl", "s", "5-", NULL};
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -77,15 +71,28 @@ static const char *downbright[] = {"brightnessctl", "s", "5-", NULL};
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "konsole", NULL };
 
+//volume keys
+static const char *volume[3][4] = {
+	{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%"},
+	{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%"},
+	{"pactl", "set-sink-mute"  , "@DEFAULT_SINK@", "toggle"} 
+};
+
+//brightness keys
+static const char *brightness[2][4] = {
+	{"brightnessctl", "s", "+5", NULL},
+	{"brightnessctl", "s", "5-", NULL}
+};
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	//custom keys
-	{ MODKEY,						XK_3,      spawn,	 	   {.v = upvol } },
-	{ MODKEY,						XK_2,      spawn,	       {.v = downvol } },
-	{ MODKEY,						XK_1,	   spawn,	       {.v = mute } },
-	{ MODKEY,						XK_0,	   spawn,	       {.v = upbright } },
-	{ MODKEY,						XK_9,      spawn,	       {.v = downbright } },
-	//the defaults
+	//my custom keys
+	{ MODKEY,						XK_Up,     spawn,	 	   {.v = volume[0] } },
+	{ MODKEY,						XK_Down,   spawn,	       {.v = volume[1] } },
+	{ MODKEY,						XK_KP_0,   spawn,	       {.v = volume[2] } },
+	{ MODKEY,						XK_Right,  spawn,	       {.v = brightness[0] } },
+	{ MODKEY,						XK_Left,   spawn,	       {.v = brightness[1] } },
+	//default keys
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
