@@ -1,5 +1,4 @@
 /* See LICENSE file for copyright and license details. */
-#include <X11/XF86keysym.h>	//so I can use volume up and down
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
@@ -81,11 +80,11 @@ static const char *termcmd[]  = { "konsole", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	//custom keys
-	{ 0,		XF86XK_AudioRaiseVolume,   spawn,	   {.v = upvol } },
-	{ 0,		XF86XK_AudioLowerVolume,   spawn,	   {.v = downvol } },
-	{ 0,		XF86XK_AudioMute,	   spawn,	   {.v = mute } },
-	{ 0,		XF86XK_MonBrightnessUp,	   spawn,	   {.v = upbright } },
-	{ 0,		XF86XK_MonBrightnessDown,  spawn,	   {.v = downbright } },
+	{ MODKEY,						XK_F3,     spawn,	 	   {.v = upvol } },
+	{ MODKEY,						XK_F2,     spawn,	       {.v = downvol } },
+	{ MODKEY,						XK_F1,	   spawn,	       {.v = mute } },
+	{ MODKEY,						XK_F7,	   spawn,	       {.v = upbright } },
+	{ MODKEY,						XK_F6,     spawn,	       {.v = downbright } },
 	//the defaults
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
