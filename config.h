@@ -80,8 +80,8 @@ static const char *volume[3][4] = {
 
 //brightness keys
 static const char *brightness[2][4] = {
-	{"/home/sgannon/Github/dwm/brightness_ctl.sh", "up", NULL},
-	{"/home/sgannon/Github/dwm/brightness_ctl.sh", "down", NULL}
+	{"sudo", "/home/sgannon/Github/dwm/brightness_ctl.sh", "up", NULL},
+	{"sudo", "/home/sgannon/Github/dwm/brightness_ctl.sh", "down", NULL}
 };
 
 static const Key keys[] = {
