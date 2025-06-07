@@ -6,8 +6,10 @@ static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10",
-					"BmPlus_IBM_VGA_8x16:size=12" };
+static const char *fonts[]          = { 
+	"monospace:size=10",
+	"BmPlus_IBM_VGA_8x16:size=16" 
+};
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -22,8 +24,7 @@ static const char *colors[][3]      = {
 //commands that will run at start automatically; shell commands need "sh", "-c"
 static const char *const autostart[] = {
 	"hsetroot", "-center", "/home/sgannon/Pictures/Serpinski_Linux.png", NULL,	//sets wallpaper
-	"sh", "-c", "/home/sgannon/Github/dwm/dwm_start.sh", NULL,	//turns on natural scrolling
-	"sh", "-c", "while :; do /home/sgannon/Github/dwm/dwm_status.sh -; sleep 1; done", NULL,	//sets up status bar
+	"sh", "-c", "/home/sgannon/Github/personal-dwm/touchpad_props.sh", NULL,	//turns on natural scrolling
 	"konsole", NULL,
 	NULL /* terminate */
 };
@@ -72,10 +73,10 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray
 static const char *termcmd[]  = { "konsole", NULL };
 
 //volume keys
-static const char *volume[3][4] = {
-	{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%"},
-	{"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%"},
-	{"pactl", "set-sink-mute"  , "@DEFAULT_SINK@", "toggle"} 
+static const char *volume[3][6] = {
+	{"sudo", "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL},
+	{"sudo", "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL},
+	{"sudo", "pactl", "set-sink-mute"  , "@DEFAULT_SINK@", "toggle", NULL} 
 };
 
 //brightness keys
